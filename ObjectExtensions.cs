@@ -2,7 +2,7 @@
 
 namespace ObjectExtensions
 {
-    static public class Extensions
+    static public class ObjectExtensions
     {
         static public Boolean IsNull(this Object o)
         {
