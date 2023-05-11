@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RepositoryUrl>https://github.com/FreedomFaighter/ObjectExtensions</RepositoryUrl>
+    <Title>ObjectExtensions</Title>
+    <Copyright>2013</Copyright>
   </PropertyGroup>
 
 </Project>
