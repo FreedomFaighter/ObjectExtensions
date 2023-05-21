@@ -5,9 +5,10 @@ name: .NET
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
 
 jobs:
   build:
