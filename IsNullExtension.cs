@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace ObjectExtensions
 {
     static public class IsNullExtension
@@ -5,6 +7,11 @@ namespace ObjectExtensions
         static public bool IsNull(this object o)
         {
             return o == null;
+        }
+
+        static public Task<bool> IsNullAsync(this object o)
+        {
+            return new Task<bool>(() => { return o == null; });
         }
     }
 }
