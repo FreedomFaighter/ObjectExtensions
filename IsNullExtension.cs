@@ -11,7 +11,7 @@ namespace ObjectExtensions
 
         static public Task<bool> IsNullAsync(this object o)
         {
-            return new Task<bool>(() => { return o == null; });
+            return new Task<bool>(() => { return o.IsNull(); });
         }
     }
 }
