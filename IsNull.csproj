@@ -8,6 +8,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/FreedomFaighter/ObjectExtensions</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <AssemblyVersion>1.0.0.11</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
