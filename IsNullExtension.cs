@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace ObjectExtensions
 {
-    static public class IsNullExtension
+    static public partial class IsNullExtension
     {
         static public bool IsNull(this object o)
         {
