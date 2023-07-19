@@ -8,8 +8,6 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
     - "v*.*.*.*"
-    branches:
-      - main # Default release branch, may also be named 'master' or 'develop'
 jobs:
   build:
     runs-on: windows-2019
