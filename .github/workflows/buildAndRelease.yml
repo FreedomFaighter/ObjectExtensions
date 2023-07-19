@@ -46,4 +46,4 @@ jobs:
         asset_content_type: application/dll
     - name: Publish to NuGet
       id: nuget_publish
-      run: dotnet nuget push -k ${{ secrets.NUGET_API_KEY }} ${{ github.workspace }}\bin\Release\IsNull-${{ github.ref }}.nupkg
+      run: dotnet nuget push -k ${{ secrets.NUGET_API_KEY }} "${{ github.workspace }}\bin\Release\IsNull-${{ github.ref }}.nupkg"
