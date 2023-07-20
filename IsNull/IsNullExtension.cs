@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace ObjectExtensions
@@ -9,9 +10,9 @@ namespace ObjectExtensions
             return o == null;
         }
 
-        static public Task<bool> IsNullAsync(this object o)
+        static public async Task<bool> IsNullAsync(this object o)
         {
-            return new Task<bool>(() => { return o.IsNull(); });
+            return await new Task<bool>(() => { return o.IsNull(); });
         }
     }
 }

@@ -7,8 +7,7 @@ on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-    - "v*.*.*.*"
-
+    - "v*.*.*"
 jobs:
   build:
     runs-on: windows-2019
@@ -17,33 +16,38 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 2.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build -c Release --no-restore
-#    - name: Test
-#      run: dotnet test --no-build --verbosity normal
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ${{github.workspace}}\bin\Release\netstandard2.0\IsNull.dll
-        asset_name: IsNull.dll
-        asset_content_type: application/dll
-    - name: Publish to NuGet
-      id: nuget_publish
-      run: dotnet nuget push -k ${{ secrets.NUGET_API_KEY }} "${{ github.workspace }}\bin\Release\IsNull-${{ github.ref }}.nupkg"
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: ${{github.workspace}}\IsNull\IsNull.csproj
+
+          # Configuration to build and package
+          BUILD_CONFIGURATION: Release
+
+          # Platform target to compile (default is empty/AnyCPU)
+          BUILD_PLATFORM: x64
+
+          # NuGet package id, used for version detection & defaults to project name
+          PACKAGE_NAME: IsNull
+
+          # Filepath with version info, relative to root of repository & defaults to PROJECT_FILE_PATH
+          # VERSION_FILE_PATH: Directory.Build.props
+
+          # Regex pattern to extract version info in a capturing group
+          VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+
+          # Useful with external providers like Nerdbank.GitVersioning, ignores VERSION_FILE_PATH & VERSION_REGEX
+          # VERSION_STATIC: ${{ github.ref }}
+
+          # Flag to toggle git tagging, enabled by default
+          # TAG_COMMIT: true
+
+          # Format of the git tag, [*] gets replaced with actual version
+          TAG_FORMAT: v*
+
+          # API key to authenticate with NuGet server
+          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+
+          # NuGet server uri hosting the packages, defaults to https://api.nuget.org
+          NUGET_SOURCE: https://api.nuget.org
+
+          # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
+          # INCLUDE_SYMBOLS: false
